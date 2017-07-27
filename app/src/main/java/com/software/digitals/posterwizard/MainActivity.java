@@ -1,5 +1,6 @@
 package com.software.digitals.posterwizard;
 
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +13,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MainActivity extends AppCompatActivity {
-
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -47,10 +47,19 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         Uri uri = Uri.parse("http://i.imgur.com/1DGw7dS.jpg");
         SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.my_image_view);
         draweeView.setImageURI(uri);
+
+        // Create the fragment manager, add the fragment
+        MyFragment mFragment = new MyFragment();
+        android.app.FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.content, mFragment);
+        transaction.commit();
+
+        // TODO remove fragment on click.
+
     }
 
 }
