@@ -7,10 +7,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/fragTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Hello From Fragment"
+        android:textAlignment="center"
         android:textColor="@android:color/black" />
 </LinearLayout>

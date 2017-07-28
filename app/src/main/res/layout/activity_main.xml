@@ -10,27 +10,23 @@
     android:orientation="vertical"
     tools:context="com.software.digitals.posterwizard.MainActivity">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/my_image_view"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        fresco:placeholderImage="@drawable/my_drawable" />
-
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/title_home" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/my_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fresco:placeholderImage="@drawable/my_drawable" />
+
+        </RelativeLayout>
 
     </FrameLayout>
 

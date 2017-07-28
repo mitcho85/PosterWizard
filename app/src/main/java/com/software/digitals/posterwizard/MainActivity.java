@@ -22,14 +22,16 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    // retreive the fragment
+                    // retreive the fragment, and get it's text view
+                    setFragmentText("myFragment", R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    // retreive the fragment, and get it's text view
+                    setFragmentText("myFragment", R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    // retreive the fragment, and get it's text view
+                    setFragmentText("myFragment", R.string.title_notifications);
                     return true;
             }
             return false;
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    private void setFragmentText(String fragId, int strResId) {
+        android.app.FragmentManager manager = getFragmentManager();
+        MyFragment myFrag = (MyFragment) manager.findFragmentByTag(fragId);
+        myFrag.setmTextMessage(strResId);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +51,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextMessage = (TextView) findViewById(R.id.message);
+
+        // Set the on click listener for the bottom bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // go get the image
         Uri uri = Uri.parse("http://i.imgur.com/1DGw7dS.jpg");
         SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.my_image_view);
         draweeView.setImageURI(uri);
@@ -55,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         MyFragment mFragment = new MyFragment();
         android.app.FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.content, mFragment);
+        transaction.add(R.id.content, mFragment, "myFragment");
         transaction.commit();
 
         // TODO remove fragment on click.

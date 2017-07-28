@@ -13,11 +13,22 @@ import android.widget.TextView;
  */
 
 public class MyFragment extends Fragment {
-    private TextView mTextMessage;
+    private TextView mTextView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.my_fragment, container, false);
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        mTextView = (TextView) getView().findViewById(R.id.fragTextView);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void setmTextMessage(int strResId) {
+        this.mTextView.setText(strResId);
+    }
+
 }
