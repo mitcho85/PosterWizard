@@ -6,7 +6,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0"
+    android:background="@android:color/darker_gray"
     android:orientation="vertical"
     tools:context="com.software.digitals.posterwizard.MainActivity">
 

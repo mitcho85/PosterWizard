@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="message" type="id">Mitch</item>
+    <item name="wallpaper_description" type="id">dummy description</item>
 </resources>

@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity implements WallpaperListFrag
                     return true;
                 case R.id.navigation_dashboard:
                     return true;
-                case R.id.navigation_notifications:
-                    return true;
             }
             return false;
         }
@@ -49,12 +47,12 @@ public class MainActivity extends AppCompatActivity implements WallpaperListFrag
     }
 
     @Override
-    public void OnWallpaperSelected(int imageResId, String name, String description, String url) {
+    public void OnWallpaperSelected(int imageResId, String name, String url) {
         final WallpaperDetailsFragment detailsFragment =
-                WallpaperDetailsFragment.newInstance(imageResId, name, description, url);
+                WallpaperDetailsFragment.newInstance(imageResId, name, url);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.root_layout, detailsFragment, "rageComicDetails")
+                .replace(R.id.root_layout, detailsFragment, "wallpaperDetails")
                 .addToBackStack(null)
                 .commit();
     }

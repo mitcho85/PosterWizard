@@ -24,11 +24,9 @@ import android.widget.TextView;
 public class WallpaperListFragment extends Fragment {
     private static final String ARGUMENT_IMAGE_RES_ID = "imageResId";
     private static final String ARGUMENT_NAME = "name";
-    private static final String ARGUMENT_DESCRIPTION = "description";
     private static final String ARGUMENT_URL = "url";
     private int[] mImageResIds;
     private String[] mNames;
-    private String[] mDescriptions;
     private String[] mUrls;
     private OnWallpaperSelected mListener;
 
@@ -43,16 +41,15 @@ public class WallpaperListFragment extends Fragment {
         if (context instanceof OnWallpaperSelected) {
             mListener = (OnWallpaperSelected) context;
         } else {
-            throw new ClassCastException(context.toString() + " must implement OnRageComicSelected.");
+            throw new ClassCastException(context.toString() + " must implement OnWallpaperSelected.");
         }
 
-        // Get rage face names and descriptions.
+        // Get the wallpaper descriptions
         final Resources resources = context.getResources();
         mNames = resources.getStringArray(R.array.names);
-        mDescriptions = resources.getStringArray(R.array.descriptions);
         mUrls = resources.getStringArray(R.array.urls);
 
-        // Get rage face images.
+        // Get the wallpaper images
         final TypedArray typedArray = resources.obtainTypedArray(R.array.images);
         final int imageCount = mNames.length;
         mImageResIds = new int[imageCount];
@@ -70,20 +67,19 @@ public class WallpaperListFragment extends Fragment {
         final Activity activity = getActivity();
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
-        recyclerView.setAdapter(new RageComicAdapter(activity));
+        recyclerView.setAdapter(new WallpaperAdapter(activity));
         return view;
     }
 
     public interface OnWallpaperSelected {
-        void OnWallpaperSelected(int imageResId, String name,
-                                 String description, String url);
+        void OnWallpaperSelected(int imageResId, String name, String url);
     }
 
-    class RageComicAdapter extends RecyclerView.Adapter<ViewHolder> {
+    class WallpaperAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         private LayoutInflater mLayoutInflater;
 
-        public RageComicAdapter(Context context) {
+        public WallpaperAdapter(Context context) {
             mLayoutInflater = LayoutInflater.from(context);
         }
 
@@ -97,13 +93,12 @@ public class WallpaperListFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, final int position) {
             final int imageResId = mImageResIds[position];
             final String name = mNames[position];
-            final String description = mDescriptions[position];
             final String url = mUrls[position];
             viewHolder.setData(imageResId, name);
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.OnWallpaperSelected(imageResId, name, description, url);
+                    mListener.OnWallpaperSelected(imageResId, name, url);
                 }
             });
 
@@ -125,7 +120,7 @@ public class WallpaperListFragment extends Fragment {
             super(itemView);
 
             // Get references to image and name.
-            mImageView = (ImageView) itemView.findViewById(R.id.comic_image);
+            mImageView = (ImageView) itemView.findViewById(R.id.wallpaper_image);
             mNameTextView = (TextView) itemView.findViewById(R.id.name);
         }
 
