@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements WallpaperListFrag
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.root_layout, WallpaperListFragment.newInstance(), "rageComicList")
+                    .add(R.id.root_layout, WallpaperListFragment.newInstance(), "WallpaperList")
                     .commit();
         }
         // Set the on click listener for the bottom bar
